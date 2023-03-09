@@ -18,6 +18,7 @@ export default {
 </script>
 
 <style scoped>
+
   .card{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -27,8 +28,15 @@ export default {
       "card-gender card-specie"
       "card-status card-status"
     ;
+    grid-column-gap: 1rem;
     width: fit-content;
     text-align: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    border-style: solid;
+    background-color: lightgray;
+    box-shadow: 10px 5px 5px lightgray;
+    padding: 0.5rem;
   }
 
   .card-image{
@@ -37,25 +45,35 @@ export default {
 
   .card-specie{
     grid-area: card-specie;
+    border-radius: 0.5rem;
+    box-shadow: inset -10px -5px 5px darkgrey;
   }
 
   .card-gender{
     grid-area: card-gender;
+    border-radius: 0.5rem;
+    box-shadow: inset -10px -5px 5px darkgrey;
   }
 
   .card-status{
     grid-area: card-status;
+    margin-left:2rem;
+    margin-right:2rem;
+    border-radius: 0.5rem;
   }
 
   .Alive{
     background-color: green;
+    box-shadow: inset -10px -5px 5px darkgreen;
   }
 
   .Dead{
     background-color:red;
+    box-shadow: inset -10px -5px 5px darkred;
   }
 
   .unknown{
-    background-color:grey;
+    background-color:darkgrey;
+    box-shadow: inset -10px -5px 5px grey;
   }
 </style>

@@ -4,8 +4,6 @@
     <FilterList>
       <FiltersSelect :title="genderTitle" :filters="genderFilters" v-on:filterSelected="genderSelected"></FiltersSelect>
       <FiltersSelect :title="statusTitle" :filters="statusFilters" v-on:filterSelected="statusSelected"></FiltersSelect>
-      <FilterCheckBox :title="genderTitle" :filters="genderFilters" v-on:filterChecked="genderChecked"></FilterCheckBox>
-      <FilterCheckBox :title="statusTitle" :filters="statusFilters" v-on:filterChecked="statusChecked"></FilterCheckBox>
     </FilterList>
   </aside>
 
@@ -13,12 +11,11 @@
 
 <script>
 import FiltersSelect from "@/components/FiltersSelect.vue";
-import FilterCheckBox from "@/components/FilterCheckBox.vue";
 import FilterList from "@/components/FilterList.vue";
 
 export default {
   name: "SideBar",
-  components: { FilterList, FilterCheckBox, FiltersSelect },
+  components: { FilterList, FiltersSelect },
   methods:{
     search(event){
       this.$emit('searchInput',event.target.value);
@@ -28,13 +25,7 @@ export default {
     },
     statusSelected(event){
       this.$emit('statusSelected',event);
-    },
-    genderChecked(event){
-      this.$emit('genderChecked',event);
-    },
-    statusChecked(event){
-      this.$emit('statusChecked',event);
-    },
+    }
   },
   data(){
     return{
@@ -65,6 +56,14 @@ export default {
 .sideBar{
   display:flex;
   flex-direction: column;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  border-style: solid;
+  background-color: lightgray;
+  box-shadow: 10px 5px 5px lightgray;
+  height: 98%;
+  width: 80%;
+  padding:1.5rem;
 }
 
 </style>

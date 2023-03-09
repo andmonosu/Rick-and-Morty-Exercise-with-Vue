@@ -6,11 +6,10 @@
     </div>
   </header>
   <main>
-    <SideBar v-on:searchInput="setName" v-on:genderSelected="filterByGenderSelect" v-on:statusSelected="filterByStatusSelect"
-             class="asideBar" :characters="charactersWithoutFiltering" v-on:genderChecked="filterByGenderChecked"
-      v-on:statusChecked="filterByStatusChecked"></SideBar>
+    <SideBar v-on:searchInput="setName" v-on:genderSelected="setFilterByGender" v-on:statusSelected="setFilterByStatus"
+             class="asideBar" :characters="charactersWithoutFiltering"></SideBar>
     <CardContainer class="container">
-      <Card v-for="character in charactersVisible" :character="character"></Card>
+      <Card v-for="character in characters" :character="character"></Card>
     </CardContainer>
     <ButtonContainer class="buttons" :info="info"  v-on:sendQuery="setQuery"></ButtonContainer>
   </main>
@@ -29,24 +28,11 @@ export default {
     return {
       characters: [],
       charactersWithoutFiltering:[],
-      genderSelect:"",
-      statusSelect:"",
-      genderCheckbox:new Set(),
-      statusCheckbox:new Set(),
+      gender:"",
+      status:"",
       name:"",
       query:"",
       info:""
-    }
-  },computed: {
-  charactersVisible(){
-    let characters = this.characters;
-      if (this.genderCheckbox.size!==0) {
-        characters = characters.filter(character => this.genderCheckbox.has(character['gender']));
-      }
-      if (this.statusCheckbox.size!==0) {
-        characters = characters.filter(character => this.statusCheckbox.has(character.status));
-      }
-    return characters;
     }
   },
   methods: {
@@ -55,14 +41,10 @@ export default {
         this.characters = results.results;
         this.info = results.info;
       })
-    },filterByGenderSelect(event){
-      this.genderSelect = event;
-    },filterByStatusSelect(event){
-      this.statusSelect = event;
-    },filterByGenderChecked(event){
-      this.genderCheckbox = event;
-    },filterByStatusChecked(event){
-      this.statusCheckbox = event;
+    },setFilterByGender(event){
+      this.gender = event;
+    },setFilterByStatus(event){
+      this.status = event;
     },setName(event){
       this.name = event;
     },setQuery(event){
@@ -72,12 +54,14 @@ export default {
 
   },watch:{
     name(){
-      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.statusSelect}&gender=${this.genderSelect}`
+      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
       this.searchCharacters();
       this.charactersWithoutFiltering = this.characters;
-    },statusSelect(){
+    },status(){
+      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
       this.searchCharacters();
-    },genderSelect(){
+    },gender(){
+      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
       this.searchCharacters();
     }
   }
