@@ -1,10 +1,12 @@
 <template>
-  <article class="card">
-    <img alt="Character Image" v-bind:src="character.image" class="card-image">
-    <p class="card-gender">{{ character.gender }}</p>
-    <p class="card-specie">{{ character.species }}</p>
-    <p class="card-status" v-bind:class="character.status">{{ character.status }}</p>
-  </article>
+  <Transition>
+    <article class="card">
+      <img alt="Character Image" v-bind:src="character.image" class="card-image">
+      <p class="card-gender">{{ character.gender }}</p>
+      <p class="card-specie">{{ character.species }}</p>
+      <p class="card-status" v-bind:class="character.status">{{ character.status }}</p>
+    </article>
+  </Transition>
 </template>
 
 <script>
@@ -41,6 +43,16 @@ export default {
 
   .card-image{
     grid-area:card-image;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-image img{
+    object-fit: cover;
+    width: auto;
+    height: auto;
   }
 
   .card-specie{
@@ -75,5 +87,15 @@ export default {
   .unknown{
     background-color:darkgrey;
     box-shadow: inset -10px -5px 5px grey;
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
   }
 </style>

@@ -8,9 +8,13 @@
   <main>
     <SideBar v-on:searchInput="setName" v-on:genderSelected="setFilterByGender" v-on:statusSelected="setFilterByStatus"
              class="asideBar" :characters="charactersWithoutFiltering"></SideBar>
-    <CardContainer class="container">
-      <Card v-for="character in characters" :character="character"></Card>
-    </CardContainer>
+
+      <CardContainer class="container">
+        <TransitionGroup name="list">
+          <Card v-for="character in characters" :character="character"></Card>
+        </TransitionGroup>
+      </CardContainer>
+
     <ButtonContainer class="buttons" :info="info"  v-on:sendQuery="setQuery"></ButtonContainer>
   </main>
   <footer>
@@ -54,7 +58,7 @@ export default {
 
   },watch:{
     name(){
-      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
+      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}`;
       this.searchCharacters();
       this.charactersWithoutFiltering = this.characters;
     },status(){
@@ -63,8 +67,11 @@ export default {
     },gender(){
       this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
       this.searchCharacters();
+    },
+    },mounted() {
+      this.query = `https://rickandmortyapi.com/api/character`
+      this.searchCharacters()
     }
-  }
 }
 </script>
 <style lang="css" scoped>
@@ -73,8 +80,7 @@ export default {
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr 3fr;
-    grid-column-gap: 15px;
-    grid-row-gap: 15px;
+    grid-row-gap: 6rem;
     grid-template-areas:
       "aside-bar card-container"
       "button-container button-container"
@@ -83,6 +89,7 @@ export default {
 
   .asideBar{
     grid-area: aside-bar;
+    object-fit: contain;
   }
 
   .container{
@@ -140,6 +147,33 @@ export default {
     box-shadow: 10px 5px 5px lightgray;
   }
 
+  @media only screen and (max-width: 800px) {
+    main {
+      grid-template-columns: 30% 70%;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    main {
+      grid-template-columns: auto;
+      grid-template-rows: 1fr auto 1fr;
+      grid-template-areas: "aside-bar" "card-container" "button-container";
+    }
+  }
+
+  .list-move,
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 1.0s ease;
+  }
+
+  .list-enter-from,
+  .list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  .list-leave-active {
+    position: absolute;
+  }
 
 
 </style>
