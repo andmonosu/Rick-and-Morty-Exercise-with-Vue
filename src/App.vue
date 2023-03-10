@@ -25,18 +25,16 @@ import SideBar from "./components/SideBar.vue";
 import CardContainer from "./components/CardContainer.vue";
 import ButtonContainer from "./components/ButtonContainer.vue";
 import Card from "@/components/Card.vue";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   components: { Card, ButtonContainer, CardContainer, SideBar },
   data(){
     return {
-      characters: [],
       charactersWithoutFiltering:[],
       gender:"",
       status:"",
       name:"",
-      query:"",
-      info:""
     }
   },
   methods: {
@@ -54,7 +52,11 @@ export default {
     },setQuery(event){
       this.query=event;
       this.searchCharacters();
-    }
+    },...mapActions([
+      'searchCharacters'
+    ]),...mapMutations([
+
+    ])
 
   },watch:{
     name(){
