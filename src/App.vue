@@ -42,8 +42,13 @@ export default {
   methods: {
     searchCharacters(){
       fetch(this.query).then(res => res.json()).then(results=>{
-        this.characters = results.results;
-        this.info = results.info;
+        if(results.error==="There is nothing here"){
+          this.characters = [];
+          this.info = "";
+        }else{
+          this.characters = results.results;
+          this.info = results.info;
+        }
       })
     },setFilterByGender(event){
       this.gender = event;
@@ -58,7 +63,7 @@ export default {
 
   },watch:{
     name(){
-      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}`;
+      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
       this.searchCharacters();
       this.charactersWithoutFiltering = this.characters;
     },status(){
