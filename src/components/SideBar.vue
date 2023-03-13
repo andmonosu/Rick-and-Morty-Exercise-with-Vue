@@ -12,19 +12,24 @@
 <script>
 import FiltersSelect from "@/components/FiltersSelect.vue";
 import FilterList from "@/components/FilterList.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "SideBar",
   components: { FilterList, FiltersSelect },
   methods:{
     search(event){
-      this.$emit('searchInput',event.target.value);
+      this.$store.commit('setName',event.target.value)
+      this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`)
+      this.$store.commit('setCharacterWithoutFiltering')
     },
     genderSelected(event){
-      this.$emit('genderSelected',event);
+      this.$store.commit('setGender',event);
+      this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`)
     },
     statusSelected(event){
-      this.$emit('statusSelected',event);
+      this.$store.commit('setStatus',event);
+      this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`)
     }
   },
   data(){
@@ -32,9 +37,6 @@ export default {
       genderTitle: "Gender",
       statusTitle: "Status",
     }
-  },
-  props:{
-    characters:Array,
   },computed:{
     genderFilters(){
       let filters = new Set();
@@ -45,7 +47,12 @@ export default {
       let filters = new Set();
       this.characters.map(character => filters.add(character.status));
       return filters;
-    }
+    },...mapState({
+      characters:"charactersWithoutFiltering",
+      name:"name",
+      gender:"gender",
+      status:"status"
+  })
   }
 };
 

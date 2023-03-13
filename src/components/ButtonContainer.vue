@@ -16,10 +16,8 @@ export default {
     info:Object,
   },methods:{
     sendQuery(event){
-      this.$emit('sendQuery',event.target.value);
+      this.$store.dispatch('changeQueryAndSearch',event.target.value)
     }
-  },emits:{
-    sendQuery:null
   }
 };
 </script>

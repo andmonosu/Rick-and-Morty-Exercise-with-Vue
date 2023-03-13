@@ -6,16 +6,14 @@
     </div>
   </header>
   <main>
-    <SideBar v-on:searchInput="setName" v-on:genderSelected="setFilterByGender" v-on:statusSelected="setFilterByStatus"
-             class="asideBar" :characters="charactersWithoutFiltering"></SideBar>
-
+    <SideBar class="asideBar"></SideBar>
       <CardContainer class="container">
         <TransitionGroup name="list">
           <Card v-for="character in characters" :character="character"></Card>
         </TransitionGroup>
       </CardContainer>
 
-    <ButtonContainer class="buttons" :info="info"  v-on:sendQuery="setQuery"></ButtonContainer>
+    <ButtonContainer class="buttons" :info="info"></ButtonContainer>
   </main>
   <footer>
   </footer>
@@ -25,55 +23,17 @@ import SideBar from "./components/SideBar.vue";
 import CardContainer from "./components/CardContainer.vue";
 import ButtonContainer from "./components/ButtonContainer.vue";
 import Card from "@/components/Card.vue";
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 
 export default {
   components: { Card, ButtonContainer, CardContainer, SideBar },
-  data(){
-    return {
-      charactersWithoutFiltering:[],
-      gender:"",
-      status:"",
-      name:"",
-    }
-  },
-  methods: {
-    searchCharacters(){
-      fetch(this.query).then(res => res.json()).then(results=>{
-        this.characters = results.results;
-        this.info = results.info;
-      })
-    },setFilterByGender(event){
-      this.gender = event;
-    },setFilterByStatus(event){
-      this.status = event;
-    },setName(event){
-      this.name = event;
-    },setQuery(event){
-      this.query=event;
-      this.searchCharacters();
-    },...mapActions([
-      'searchCharacters'
-    ]),...mapMutations([
-
+  computed:{
+    ...mapState([
+      "characters","info"
     ])
-
-  },watch:{
-    name(){
-      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}`;
-      this.searchCharacters();
-      this.charactersWithoutFiltering = this.characters;
-    },status(){
-      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
-      this.searchCharacters();
-    },gender(){
-      this.query = `https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`;
-      this.searchCharacters();
-    },
-    },mounted() {
-      this.query = `https://rickandmortyapi.com/api/character`
-      this.searchCharacters()
-    }
+  },mounted() {
+    this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character`)
+  }
 }
 </script>
 <style lang="css" scoped>
