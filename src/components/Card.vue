@@ -1,7 +1,12 @@
 <template>
   <Transition>
     <article class="card">
-      <img alt="Character Image" v-bind:src="character.image" class="card-image">
+      <div class="card-image">
+        <img alt="Character Image" v-bind:src="character.image">
+        <div class="card-name">
+          <p>{{ character.name }}</p>
+        </div>
+      </div>
       <p class="card-gender">{{ character.gender }}</p>
       <p class="card-specie">{{ character.species }}</p>
       <p class="card-status" v-bind:class="character.status">{{ character.status }}</p>
@@ -47,6 +52,30 @@ export default {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    position: relative;
+  }
+
+  .card-name{
+    display:flex;
+    align-items: flex-end;
+    justify-content: center;
+    position:absolute;
+    overflow:hidden;
+    width:100%;
+    height: 100%;
+    background-color: rgba(31, 31, 31, 0.9);
+    opacity:0;
+    transition: opacity 0.3s
+  }
+
+  .card-image:hover .card-name{
+    opacity:0.6;
+  }
+
+  .card-name p{
+    margin-bottom: 0.5rem;
+    color:white;
+    font-size: large;
   }
 
   .card-image img{
