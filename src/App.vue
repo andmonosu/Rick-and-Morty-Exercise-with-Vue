@@ -28,11 +28,13 @@ import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   components: { Card, ButtonContainer, CardContainer, SideBar },
   computed:{
-    ...mapState([
-      "characters","info"
-    ])
+  ...mapState('characters', {
+    characters: "characters",
+  }),...mapState('search',{
+    info:"info"
+  }),
   },mounted() {
-    this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character`)
+    this.$store.dispatch('search/changeQueryAndSearch',`https://rickandmortyapi.com/api/character`);
   }
 }
 </script>

@@ -19,17 +19,17 @@ export default {
   components: { FilterList, FiltersSelect },
   methods:{
     search(event){
-      this.$store.commit('setName',event.target.value)
-      this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`)
-      this.$store.commit('setCharacterWithoutFiltering')
+      this.$store.commit('search/setName',event.target.value)
+      this.$store.dispatch('search/changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}`+(this.status===""?"":`&status=${this.status}`)+(this.gender===""?"":`&gender=${this.gender}`))
+      this.$store.commit('characters/setCharacterWithoutFiltering')
     },
     genderSelected(event){
-      this.$store.commit('setGender',event);
-      this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`)
+      this.$store.commit('search/setGender',event);
+      this.$store.dispatch('search/changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}`+(this.status===""?"":`&status=${this.status}`)+(this.gender===""?"":`&gender=${this.gender}`))
     },
     statusSelected(event){
-      this.$store.commit('setStatus',event);
-      this.$store.dispatch('changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}&status=${this.status}&gender=${this.gender}`)
+      this.$store.commit('search/setStatus',event);
+      this.$store.dispatch('search/changeQueryAndSearch',`https://rickandmortyapi.com/api/character/?name=${this.name}`+(this.status===""?"":`&status=${this.status}`)+(this.gender===""?"":`&gender=${this.gender}`))
     }
   },
   data(){
@@ -47,12 +47,13 @@ export default {
       let filters = new Set();
       this.characters.map(character => filters.add(character.status));
       return filters;
-    },...mapState({
-      characters:"charactersWithoutFiltering",
+    },...mapState('characters', {
+      characters: "charactersWithoutFiltering",
+    }),...mapState('search',{
       name:"name",
       gender:"gender",
       status:"status"
-  })
+    }),
   }
 };
 

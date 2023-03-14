@@ -16,7 +16,7 @@ export default {
     info:Object,
   },methods:{
     sendQuery(event){
-      this.$store.dispatch('changeQueryAndSearch',event.target.value)
+      this.$store.dispatch('search/changeQueryAndSearch',event.target.value)
     }
   }
 };
