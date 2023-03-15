@@ -44,7 +44,7 @@ export default {
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr 3fr;
-    grid-row-gap: 6rem;
+    grid-row-gap: 3rem;
     grid-template-areas:
       "aside-bar card-container"
       "button-container button-container"

@@ -1,6 +1,9 @@
 <template>
   <aside class="sideBar">
-    <input type="text" placeholder="Search by character name" v-on:input="search">
+    <div class="search">
+      <input type="text" placeholder="Search by character name" v-on:input="search" class="search-bar">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1200px-Vector_search_icon.svg.png" alt="search-icon" class="search-icon"/>
+    </div>
     <FilterList>
       <FiltersSelect :title="genderTitle" :filters="genderFilters" v-on:filterSelected="genderSelected"></FiltersSelect>
       <FiltersSelect :title="statusTitle" :filters="statusFilters" v-on:filterSelected="statusSelected"></FiltersSelect>
@@ -73,5 +76,34 @@ export default {
   width: 80%;
   padding:1.5rem;
 }
+
+.search{
+  display: flex;
+  align-items: flex-end;
+  justify-items: center;
+}
+
+.search-bar{
+  border-radius: 0.75rem;
+  padding-left: 0.5rem;
+  margin-right: -1.5rem;
+  width: 100%;
+  height: 1.5rem;
+  font-family: monospace;
+}
+
+.search-bar:focus{
+  outline: none !important;
+  border-color: darkgrey;
+  box-shadow: 0 0 5px black;
+}
+
+.search-icon{
+  width: 1rem;
+  height: auto;
+  padding-bottom: 0.35rem;
+
+}
+
 
 </style>
