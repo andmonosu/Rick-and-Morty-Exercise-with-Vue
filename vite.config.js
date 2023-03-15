@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/Rick-and-Morty-Exercise-with-Vue/dist/s',
+  base: '/Rick-and-Morty-Exercise-with-Vue/dist/',
   plugins: [vue()],
   resolve: {
     alias: {
