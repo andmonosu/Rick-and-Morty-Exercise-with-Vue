@@ -12,9 +12,9 @@
 
 </template>
 
-<script>
-import FiltersSelect from "@/components/FiltersSelect.vue";
-import FilterList from "@/components/FilterList.vue";
+<script lang="ts">
+import FiltersSelect from "./FiltersSelect.vue";
+import FilterList from "./FilterList.vue";
 import { mapState } from "vuex";
 
 export default {

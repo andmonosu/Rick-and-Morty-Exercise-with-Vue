@@ -1,0 +1,28 @@
+Index: vite.config.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { fileURLToPath, URL } from 'node:url'\nimport vue from '@vitejs/plugin-vue'\n\n// https://vitejs.dev/config/\nmodule.exports={\n  publicPath: '/Rick-and-Morty-Exercise-with-Vue/',\n  plugins: [vue()],\n  resolve: {\n    alias: {\n      '@': fileURLToPath(new URL('./src', import.meta.url))\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/vite.config.js b/vite.config.js
+--- a/vite.config.js	(revision a88fa65c7d103c871a35f1c75a1c04296a10b8af)
++++ b/vite.config.js	(date 1678900195898)
+@@ -1,13 +1,14 @@
+ import { fileURLToPath, URL } from 'node:url'
+ import vue from '@vitejs/plugin-vue'
++import { defineConfig } from "vite";
+ 
+ // https://vitejs.dev/config/
+-module.exports={
+-  publicPath: '/Rick-and-Morty-Exercise-with-Vue/',
++export default defineConfig({
++  base: '/Rick-and-Morty-Exercise-with-Vue/',
+   plugins: [vue()],
+   resolve: {
+     alias: {
+       '@': fileURLToPath(new URL('./src', import.meta.url))
+     }
+   }
+-}
++})

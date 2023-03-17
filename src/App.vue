@@ -18,11 +18,11 @@
   <footer>
   </footer>
 </template>
-<script lang="js">
+<script lang="ts">
 import SideBar from "./components/SideBar.vue";
 import CardContainer from "./components/CardContainer.vue";
 import ButtonContainer from "./components/ButtonContainer.vue";
-import Card from "@/components/Card.vue";
+import Card from "./components/Card.vue";
 import { mapActions, mapMutations, mapState } from "vuex";
 
 export default {
