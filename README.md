@@ -18,9 +18,9 @@ npm run dev
 npm run build
 ```
 
+## Funcionalities implemented:
 
-
-1. Create Basic HTML and CSS structure in App.vue without any logic.
+1. Create Basic HTML and CSS structure in App.vue without any logic. 
 2. Modify text input so it makes API calls to [rick & morty API](https://rickandmortyapi.com/) using the
    [filter endpoint](https://rickandmortyapi.com/documentation/#filter-characters). Save the results and print the characters by console.
 3. Paint dynamically with `v-for` the characters with its name, status and image.
@@ -32,5 +32,3 @@ npm run build
 8. Create `FilterList` component that made the filter rendered interchangeable.
 9. Add fade-in transitions to the filters and cards using the `Transition` components pre-built on Vue. so every time you make a new request
    the filters and character cards appear with ease.
-10. Add a button on the page so it shows a list of all the episodes. You should leave the layout as it is, but instead of showing characters
-    information you would show episodes information in each card.
