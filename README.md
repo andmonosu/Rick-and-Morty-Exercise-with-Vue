@@ -1,14 +1,4 @@
-# Rick&Morty API with Vue
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+# Rick&Morty API with VueX
 
 ## Project Setup
 
@@ -28,8 +18,10 @@ npm run dev
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Funcionalities implemented:
+1. Create a basic store and move some data from your components to the store.
+2. Use getters and the state to retrieve the info from the store.
+3. Create mutations that modifies the state.
+4. Create an action to call the api.
+5. Divide the store en two modules, these modules should interact between them. Use `namespaced:true`.
 
-```sh
-npm run lint
-```
